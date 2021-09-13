@@ -27,6 +27,16 @@ describe "Authentication flow" do
     flow.visit Me::Edit, as: user
     should_be_signed_in(flow)
   end
+
+  # Testing the auth page with bruteforce attack
+  it "doesn't sign in through bruteforce attack" do
+    tester = SecTester::Test.new
+    tester.run_check(
+      scan_name: "UnitTestingScan - BFL",
+      test_name: "bfl",
+      target: SecTester::Target.new("http://#{ENV["LUCKY_ENV"]}:#{ENV["DEV_PORT"]}/sign_up")
+    )
+  end
 end
 
 private def should_be_signed_in(flow)
