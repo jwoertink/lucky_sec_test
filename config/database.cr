@@ -1,4 +1,4 @@
-database_name = "lucky_jumpstart_#{LuckyEnv.environment}"
+database_name = "lucky_sectest_#{LuckyEnv.environment}"
 
 AppDatabase.configure do |settings|
   if LuckyEnv.production?

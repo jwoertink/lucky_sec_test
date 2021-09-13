@@ -1,4 +1,4 @@
-name: lucky_jumpstart
+name: lucky_sectest
 version: 0.1.0
 
 authors:
@@ -6,7 +6,7 @@ authors:
 
 targets:
   webserver:
-    main: src/lucky_jumpstart.cr
+    main: src/lucky_sectest.cr
 
 crystal: 1.1.0
 

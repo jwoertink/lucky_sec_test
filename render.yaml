@@ -1,19 +1,19 @@
 databases:
-  - name: Lucky Jumpstart Primary
-    databaseName: lucky_jumpstart
-    user: lucky_jumpstart
+  - name: Lucky SecTest Primary
+    databaseName: lucky_sectest
+    user: lucky_sectest
     ipAllowList: []
 
 services:
   - type: web
-    name: Lucky Jumpstart
+    name: Lucky SecTest
     env: docker
     dockerfilePath: "./dockerfiles/webserver.Dockerfile"
     healthCheckPath: /
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: Lucky Jumpstart Primary
+          name: Lucky SecTest Primary
           property: connectionString
       - key: LUCKY_ENV
         value: production
