@@ -36,6 +36,8 @@ describe "Authentication flow" do
       test_name: "brute_force_login",
       target: SecTester::Target.new("http://#{ENV["LUCKY_ENV"]}:#{ENV["DEV_PORT"]}/sign_up")
     )
+  ensure
+    tester.try &.cleanup
   end
 end
 
