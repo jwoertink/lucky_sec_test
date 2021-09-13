@@ -33,7 +33,7 @@ describe "Authentication flow" do
     tester = SecTester::Test.new
     tester.run_check(
       scan_name: "UnitTestingScan - BFL",
-      test_name: "bfl",
+      test_name: "brute_force_login",
       target: SecTester::Target.new("http://#{ENV["LUCKY_ENV"]}:#{ENV["DEV_PORT"]}/sign_up")
     )
   end
