@@ -27,7 +27,7 @@ dependencies:
     github: crystal-community/jwt
     version: ~> 1.5.0
   sec_tester:
-    github: NeuraLegion/sec_tester
+    github: NeuraLegion/sectester
 
 development_dependencies:
   spark:
