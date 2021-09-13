@@ -94,7 +94,7 @@ shards:
 
   sec_tester:
     git: https://github.com/neuralegion/sectester.git
-    version: 1.0.1
+    version: 1.0.2
 
   selenium:
     git: https://github.com/matthewmcgarvey/selenium.cr.git
