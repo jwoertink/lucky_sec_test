@@ -34,7 +34,7 @@ describe "Authentication flow" do
     tester.run_check(
       scan_name: "UnitTestingScan - BFL",
       test_name: "brute_force_login",
-      target: SecTester::Target.new("http://#{ENV["LUCKY_ENV"]}:#{ENV["DEV_PORT"]}/sign_up")
+      target: SecTester::Target.new("http://localhost:#{ENV["DEV_PORT"]}/sign_in")
     )
   ensure
     tester.try &.cleanup
