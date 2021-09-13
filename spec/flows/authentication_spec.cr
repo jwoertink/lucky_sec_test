@@ -32,9 +32,17 @@ describe "Authentication flow" do
   it "doesn't sign in through bruteforce attack" do
     tester = SecTester::Test.new
     tester.run_check(
-      scan_name: "UnitTestingScan - BFL",
-      test_name: "brute_force_login",
-      target: SecTester::Target.new("http://localhost:#{ENV["DEV_PORT"]}/sign_in")
+      scan_name: "UnitTestingScan - SQLi",
+      test_name: "sqli",
+      target: SecTester::Target.new(
+        method: "POST",
+        url: "http://localhost:#{ENV["DEV_PORT"]}/sign_in",
+        headers: HTTP::Headers{
+          "Content-Type" => "application/x-www-form-urlencoded",
+          "Host"         => "localhost:#{ENV["DEV_PORT"]}",
+        },
+        body: "_csrf=0AU9Vu9YSF_YH2I92O4apuvsCYRuPOnKVet1KFTQE6M&user%3Aemail=test%40test.com&user%3Apassword=1234"
+      )
     )
   ensure
     tester.try &.cleanup
