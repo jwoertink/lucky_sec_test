@@ -29,7 +29,7 @@ describe "Authentication flow" do
   end
 
   # Testing the auth page with SQLi attack
-  it "doesn't sign in through SQLi attack" do
+  it "Testing sign_in page for SQLi attacks" do
     tester = SecTester::Test.new
     tester.run_check(
       scan_name: "UnitTestingScan - SQLi",
@@ -49,7 +49,7 @@ describe "Authentication flow" do
   end
 
   # Testing the auth page with Dom XSS attack
-  it "doesn't sign in through Dom XSS attack" do
+  it "Testing sign_in for dom based XSS" do
     tester = SecTester::Test.new
     tester.run_check(
       scan_name: "UnitTestingScan - Dom XSS",
@@ -61,12 +61,36 @@ describe "Authentication flow" do
   end
 
   # Testing the auth page with Dom XSS attack
-  it "doesn't sign in through Dom XSS attack" do
+  it "testing sign_up for dom based XSS" do
     tester = SecTester::Test.new
     tester.run_check(
       scan_name: "UnitTestingScan - Dom XSS",
       test_name: "dom_xss",
       target: SecTester::Target.new("http://localhost:#{ENV["DEV_PORT"]}/sign_up")
+    )
+  ensure
+    tester.try &.cleanup
+  end
+
+  # Testing the auth page with Headers Security attack
+  it "testing root for header security issues" do
+    tester = SecTester::Test.new
+    tester.run_check(
+      scan_name: "UnitTestingScan - Headers Security",
+      test_name: "header_security",
+      target: SecTester::Target.new("http://localhost:#{ENV["DEV_PORT"]}/")
+    )
+  ensure
+    tester.try &.cleanup
+  end
+
+  # Testing the auth page with Cookies Security attack
+  it "testing root for cookie security issues" do
+    tester = SecTester::Test.new
+    tester.run_check(
+      scan_name: "UnitTestingScan - Cookies Security",
+      test_name: "cookie_security",
+      target: SecTester::Target.new("http://localhost:#{ENV["DEV_PORT"]}/")
     )
   ensure
     tester.try &.cleanup
