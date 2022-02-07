@@ -28,72 +28,74 @@ describe "Authentication flow" do
     should_be_signed_in(flow)
   end
 
-  # Testing the auth page with SQLi attack
-  it "Testing sign_in page for SQLi attacks" do
-    tester = SecTester::Test.new
-    tester.run_check(
-      scan_name: "UnitTestingScan - SQLi",
-      test_name: "sqli",
-      target: SecTester::Target.new(
-        method: "POST",
-        url: "http://localhost:#{ENV["DEV_PORT"]}/sign_in",
-        headers: HTTP::Headers{
-          "Content-Type" => "application/x-www-form-urlencoded",
-          "Host"         => "localhost:#{ENV["DEV_PORT"]}",
-        },
-        body: "_csrf=0AU9Vu9YSF_YH2I92O4apuvsCYRuPOnKVet1KFTQE6M&user%3Aemail=test%40test.com&user%3Apassword=1234"
+  Lucky::ProtectFromForgery.temp_config(allow_forgery_protection: false) do
+    # Testing the auth page with SQLi attack
+    it "Testing sign_in page for SQLi attacks" do
+      tester = SecTester::Test.new
+      tester.run_check(
+        scan_name: "UnitTestingScan - SQLi",
+        test_name: "sqli",
+        target: SecTester::Target.new(
+          method: "POST",
+          url: "http://localhost:#{ENV["DEV_PORT"]}/sign_in",
+          headers: HTTP::Headers{
+            "Content-Type" => "application/x-www-form-urlencoded",
+            "Host"         => "localhost:#{ENV["DEV_PORT"]}",
+          },
+          body: "_csrf=0AU9Vu9YSF_YH2I92O4apuvsCYRuPOnKVet1KFTQE6M&user%3Aemail=test%40test.com&user%3Apassword=1234"
+        )
       )
-    )
-  ensure
-    tester.try &.cleanup
-  end
+    ensure
+      tester.try &.cleanup
+    end
 
-  # Testing the auth page with Dom XSS attack
-  it "Testing sign_in for dom based XSS" do
-    tester = SecTester::Test.new
-    tester.run_check(
-      scan_name: "UnitTestingScan - Dom XSS",
-      test_name: "dom_xss",
-      target: SecTester::Target.new("http://localhost:#{ENV["DEV_PORT"]}/sign_in")
-    )
-  ensure
-    tester.try &.cleanup
-  end
+    # Testing the auth page with Dom XSS attack
+    it "Testing sign_in for dom based XSS" do
+      tester = SecTester::Test.new
+      tester.run_check(
+        scan_name: "UnitTestingScan - Dom XSS",
+        test_name: "dom_xss",
+        target: SecTester::Target.new("http://localhost:#{ENV["DEV_PORT"]}/sign_in")
+      )
+    ensure
+      tester.try &.cleanup
+    end
 
-  # Testing the auth page with Dom XSS attack
-  it "testing sign_up for dom based XSS" do
-    tester = SecTester::Test.new
-    tester.run_check(
-      scan_name: "UnitTestingScan - Dom XSS",
-      test_name: "dom_xss",
-      target: SecTester::Target.new("http://localhost:#{ENV["DEV_PORT"]}/sign_up")
-    )
-  ensure
-    tester.try &.cleanup
-  end
+    # Testing the auth page with Dom XSS attack
+    it "testing sign_up for dom based XSS" do
+      tester = SecTester::Test.new
+      tester.run_check(
+        scan_name: "UnitTestingScan - Dom XSS",
+        test_name: "dom_xss",
+        target: SecTester::Target.new("http://localhost:#{ENV["DEV_PORT"]}/sign_up")
+      )
+    ensure
+      tester.try &.cleanup
+    end
 
-  # Testing the auth page with Headers Security attack
-  it "testing root for header security issues" do
-    tester = SecTester::Test.new
-    tester.run_check(
-      scan_name: "UnitTestingScan - Headers Security",
-      test_name: "header_security",
-      target: SecTester::Target.new("http://localhost:#{ENV["DEV_PORT"]}/")
-    )
-  ensure
-    tester.try &.cleanup
-  end
+    # Testing the auth page with Headers Security attack
+    it "testing root for header security issues" do
+      tester = SecTester::Test.new
+      tester.run_check(
+        scan_name: "UnitTestingScan - Headers Security",
+        test_name: "header_security",
+        target: SecTester::Target.new("http://localhost:#{ENV["DEV_PORT"]}/")
+      )
+    ensure
+      tester.try &.cleanup
+    end
 
-  # Testing the auth page with Cookies Security attack
-  it "testing root for cookie security issues" do
-    tester = SecTester::Test.new
-    tester.run_check(
-      scan_name: "UnitTestingScan - Cookies Security",
-      test_name: "cookie_security",
-      target: SecTester::Target.new("http://localhost:#{ENV["DEV_PORT"]}/")
-    )
-  ensure
-    tester.try &.cleanup
+    # Testing the auth page with Cookies Security attack
+    it "testing root for cookie security issues" do
+      tester = SecTester::Test.new
+      tester.run_check(
+        scan_name: "UnitTestingScan - Cookies Security",
+        test_name: "cookie_security",
+        target: SecTester::Target.new("http://localhost:#{ENV["DEV_PORT"]}/")
+      )
+    ensure
+      tester.try &.cleanup
+    end
   end
 end
 
