@@ -18,7 +18,7 @@ shards:
 
   bindata:
     git: https://github.com/spider-gazelle/bindata.git
-    version: 1.9.1
+    version: 1.10.0
 
   carbon:
     git: https://github.com/luckyframework/carbon.git
@@ -90,7 +90,7 @@ shards:
 
   sec_tester:
     git: https://github.com/neuralegion/sectester.git
-    version: 1.0.4
+    version: 1.0.6
 
   selenium:
     git: https://github.com/matthewmcgarvey/selenium.cr.git
