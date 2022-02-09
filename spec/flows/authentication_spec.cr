@@ -32,8 +32,12 @@ describe "Authentication flow" do
   it "Testing sign_in page for SQLi attacks" do
     tester = SecTester::Test.new
     tester.run_check(
-      scan_name: "UnitTestingScan - SQLi",
-      test_name: "sqli",
+      scan_name: "UnitTestingScan - SQLi, OSI, XSS",
+      test_name: [
+        "sqli",
+        "osi",
+        "xss",
+      ],
       target: SecTester::Target.new(
         method: "POST",
         url: "http://localhost:#{ENV["DEV_PORT"]}/sign_in",
@@ -41,7 +45,7 @@ describe "Authentication flow" do
           "Content-Type" => "application/x-www-form-urlencoded",
           "Host"         => "localhost:#{ENV["DEV_PORT"]}",
         },
-        body: "_csrf=0AU9Vu9YSF_YH2I92O4apuvsCYRuPOnKVet1KFTQE6M&user%3Aemail=test%40test.com&user%3Apassword=1234"
+        body: "user%3Aemail=test%40test.com&user%3Apassword=1234"
       )
     )
   ensure
