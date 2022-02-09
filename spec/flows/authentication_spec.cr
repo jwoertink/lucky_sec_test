@@ -29,7 +29,7 @@ describe "Authentication flow" do
   end
 
   # Testing the auth page with SQLi attack
-  it "Testing sign_in page for SQLi attacks" do
+  it "Testing sign_in page for SQLi, OSI, XSS attacks" do
     tester = SecTester::Test.new
     tester.run_check(
       scan_name: "UnitTestingScan - SQLi, OSI, XSS",
@@ -46,6 +46,29 @@ describe "Authentication flow" do
           "Host"         => "localhost:#{ENV["DEV_PORT"]}",
         },
         body: "user%3Aemail=test%40test.com&user%3Apassword=1234"
+      )
+    )
+  ensure
+    tester.try &.cleanup
+  end
+
+  it "Testing sign_up page for SQLi, OSI, XSS attacks" do
+    tester = SecTester::Test.new
+    tester.run_check(
+      scan_name: "UnitTestingScan - SQLi, OSI, XSS",
+      test_name: [
+        "sqli",
+        "osi",
+        "xss",
+      ],
+      target: SecTester::Target.new(
+        method: "POST",
+        url: "http://localhost:#{ENV["DEV_PORT"]}/sign_in",
+        headers: HTTP::Headers{
+          "Content-Type" => "application/x-www-form-urlencoded",
+          "Host"         => "localhost:#{ENV["DEV_PORT"]}",
+        },
+        body: "user%3Aemail=aa%40aa.com&user%3Apassword=123456789&user%3Apassword_confirmation=123456789"
       )
     )
   ensure
@@ -95,6 +118,18 @@ describe "Authentication flow" do
       scan_name: "UnitTestingScan - Cookies Security",
       test_name: "cookie_security",
       target: SecTester::Target.new("http://localhost:#{ENV["DEV_PORT"]}/")
+    )
+  ensure
+    tester.try &.cleanup
+  end
+
+  # Testing JS file for 3rd party issues
+  it "Tests /js/app.js for 3rd party issues" do
+    tester = SecTester::Test.new
+    tester.run_check(
+      scan_name: "UnitTestingScan - 3rd Party",
+      test_name: "retire_js",
+      target: SecTester::Target.new("http://localhost:#{ENV["DEV_PORT"]}/js/app.js")
     )
   ensure
     tester.try &.cleanup
