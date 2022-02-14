@@ -33,7 +33,7 @@ describe "Authentication flow" do
     tester = SecTester::Test.new
     tester.run_check(
       scan_name: "ref: #{ENV["GITHUB_REF"]?} commit: #{ENV["GITHUB_SHA"]?} run id: #{ENV["GITHUB_RUN_ID"]?}",
-      test_name: [
+      tests: [
         "sqli",
         "osi",
         "xss",
@@ -56,7 +56,7 @@ describe "Authentication flow" do
     tester = SecTester::Test.new
     tester.run_check(
       scan_name: "ref: #{ENV["GITHUB_REF"]?} commit: #{ENV["GITHUB_SHA"]?} run id: #{ENV["GITHUB_RUN_ID"]?}",
-      test_name: [
+      tests: [
         "sqli",
         "osi",
         "xss",
@@ -80,7 +80,7 @@ describe "Authentication flow" do
     tester = SecTester::Test.new
     tester.run_check(
       scan_name: "ref: #{ENV["GITHUB_REF"]?} commit: #{ENV["GITHUB_SHA"]?} run id: #{ENV["GITHUB_RUN_ID"]?}",
-      test_name: "dom_xss",
+      tests: "dom_xss",
       target: SecTester::Target.new("http://localhost:#{ENV["DEV_PORT"]}/sign_in")
     )
   ensure
@@ -92,7 +92,7 @@ describe "Authentication flow" do
     tester = SecTester::Test.new
     tester.run_check(
       scan_name: "ref: #{ENV["GITHUB_REF"]?} commit: #{ENV["GITHUB_SHA"]?} run id: #{ENV["GITHUB_RUN_ID"]?}",
-      test_name: "dom_xss",
+      tests: "dom_xss",
       target: SecTester::Target.new("http://localhost:#{ENV["DEV_PORT"]}/sign_up")
     )
   ensure
@@ -104,7 +104,7 @@ describe "Authentication flow" do
     tester = SecTester::Test.new
     tester.run_check(
       scan_name: "ref: #{ENV["GITHUB_REF"]?} commit: #{ENV["GITHUB_SHA"]?} run id: #{ENV["GITHUB_RUN_ID"]?}",
-      test_name: "header_security",
+      tests: "header_security",
       target: SecTester::Target.new("http://localhost:#{ENV["DEV_PORT"]}/")
     )
   ensure
@@ -116,7 +116,7 @@ describe "Authentication flow" do
     tester = SecTester::Test.new
     tester.run_check(
       scan_name: "ref: #{ENV["GITHUB_REF"]?} commit: #{ENV["GITHUB_SHA"]?} run id: #{ENV["GITHUB_RUN_ID"]?}",
-      test_name: "cookie_security",
+      tests: "cookie_security",
       target: SecTester::Target.new("http://localhost:#{ENV["DEV_PORT"]}/")
     )
   ensure
@@ -128,7 +128,7 @@ describe "Authentication flow" do
     tester = SecTester::Test.new
     tester.run_check(
       scan_name: "ref: #{ENV["GITHUB_REF"]?} commit: #{ENV["GITHUB_SHA"]?} run id: #{ENV["GITHUB_RUN_ID"]?}",
-      test_name: "retire_js",
+      tests: "retire_js",
       target: SecTester::Target.new("http://localhost:#{ENV["DEV_PORT"]}/js/app.js")
     )
   ensure
