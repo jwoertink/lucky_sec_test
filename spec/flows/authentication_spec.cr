@@ -52,15 +52,11 @@ describe "Authentication flow" do
     tester.try &.cleanup
   end
 
-  it "Testing sign_up page for SQLi, OSI, XSS attacks" do
+  it "Testing sign_up page for ALL attacks" do
     tester = SecTester::Test.new
     tester.run_check(
       scan_name: "ref: #{ENV["GITHUB_REF"]?} commit: #{ENV["GITHUB_SHA"]?} run id: #{ENV["GITHUB_RUN_ID"]?}",
-      tests: [
-        "sqli",
-        "osi",
-        "xss",
-      ],
+      tests: nil,
       target: SecTester::Target.new(
         method: "POST",
         url: "http://localhost:#{ENV["DEV_PORT"]}/sign_in",
