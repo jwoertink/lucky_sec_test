@@ -3,7 +3,6 @@ ENV["DEV_PORT"] = "5001"
 
 require "spec"
 require "lucky_flow"
-require "sec_tester"
 require "../src/app"
 require "../tasks/**"
 require "./support/flows/base_flow"

@@ -26,9 +26,6 @@ dependencies:
   jwt:
     github: crystal-community/jwt
     version: ~> 1.5.0
-  sec_tester:
-    github: NeuraLegion/sec_tester
-    version: ~> 1.1.5
 
 development_dependencies:
   spark:
@@ -40,3 +37,6 @@ development_dependencies:
   lucky_flow:
     github: luckyframework/lucky_flow
     version: ~> 0.7.3
+  lucky_sec_tester:
+    github: luckyframework/lucky_sec_tester
+    branch: main
