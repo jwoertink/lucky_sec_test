@@ -74,7 +74,7 @@ shards:
 
   lucky_sec_tester:
     git: https://github.com/luckyframework/lucky_sec_tester.git
-    version: 0.1.0+git.commit.811b223ae256858799133ba6e660e5f3ffdc4608
+    version: 0.1.0+git.commit.db6e34edcc5bf769be18e04505736a5632c10ebb
 
   lucky_task:
     git: https://github.com/luckyframework/lucky_task.git
