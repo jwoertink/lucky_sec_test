@@ -46,18 +46,6 @@ describe "SecTester" do
     end
   end
 
-  # Testing the auth page with Dom XSS attack
-  it "testing sign_up for dom based XSS" do
-    with_cleanup(scanner) do
-      target = scanner.build_target(SignUps::New)
-      scanner.run_check(
-        scan_name: "ref: #{ENV["GITHUB_REF"]?} commit: #{ENV["GITHUB_SHA"]?} run id: #{ENV["GITHUB_RUN_ID"]?}",
-        tests: "dom_xss",
-        target: target
-      )
-    end
-  end
-
   # Testing the auth page with Headers Security attack
   it "testing root for header security issues" do
     with_cleanup(scanner) do
