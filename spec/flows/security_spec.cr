@@ -95,7 +95,7 @@ describe "SecTester" do
         scan_name: "ref: #{ENV["GITHUB_REF"]?} commit: #{ENV["GITHUB_SHA"]?} run id: #{ENV["GITHUB_RUN_ID"]?}",
         tests: [
           "sqli",
-          "jwt"
+          "jwt",
         ],
         target: target
       )
