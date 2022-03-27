@@ -84,6 +84,23 @@ describe "SecTester" do
       )
     end
   end
+
+  it "tests API actions" do
+    with_cleanup(scanner) do
+      api_headers = HTTP::Headers{"Content-Type" => "application/json", "Accept" => "application/json"}
+      target = scanner.build_target(Api::SignIns::Create, headers: api_headers) do |t|
+        t.body = {"user" => {"email" => "aa%40aa.com", "password" => "123456789"}}.to_json
+      end
+      scanner.run_check(
+        scan_name: "ref: #{ENV["GITHUB_REF"]?} commit: #{ENV["GITHUB_SHA"]?} run id: #{ENV["GITHUB_RUN_ID"]?}",
+        tests: [
+          "sqli",
+          "jwt"
+        ],
+        target: target
+      )
+    end
+  end
 end
 
 private def scanner
